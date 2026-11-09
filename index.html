@@ -100,6 +100,26 @@
     margin-left: 6px; vertical-align: middle;
   }
 
+  .shot { display: block; margin: 14px 0 6px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
+  .shot img { display: block; width: 100%; height: auto; max-height: 420px; object-fit: contain; background: #fff; }
+  .cap { font-size: .82rem; color: var(--muted); margin: 0 0 8px; }
+
+  .embed { margin: 14px 0 6px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
+  .embed iframe { display: block; width: 100%; height: 520px; border: 0; }
+  .embed.eu iframe { height: 440px; }
+  @media (max-width: 640px) {
+    .embed iframe { height: 420px; }
+    .embed.eu iframe { height: 380px; }
+  }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; }
+  .tabs button {
+    border: 1px solid var(--line); background: var(--card); color: var(--muted);
+    font-size: .82rem; padding: 5px 12px; border-radius: 999px; cursor: pointer;
+  }
+  .tabs button.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .tabs + .embed { margin-top: 10px; }
+
   .job { margin-bottom: 30px; }
   .job-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; }
   .job-head strong { font-size: 1.05rem; }
@@ -174,8 +194,13 @@
           <h3 data-i18n="p1_t"></h3>
           <p data-i18n="p1_d"></p>
           <div class="finding" data-i18n="p1_f"></div>
+          <a class="shot" href="https://canmor115.github.io/data-projects/credit-risk-prediction/credit_risks_analysis.html" target="_blank" rel="noopener">
+            <img src="https://canmor115.github.io/data-projects/credit-risk-prediction/feature_importance.png" alt="Importancia de variables en el modelo de riesgo de crédito" loading="lazy">
+          </a>
+          <p class="cap" data-i18n="p1_cap"></p>
           <div class="tags"><span>R</span><span>C5.0</span><span>Random Forest</span><span>XGBoost</span><span>SHAP</span><span>ALE</span></div>
           <div class="links">
+            <a href="https://canmor115.github.io/data-projects/credit-risk-prediction/credit_risks_analysis.html" target="_blank" rel="noopener" data-i18n="l_analysis"></a>
             <a href="https://github.com/Canmor115/data-projects" target="_blank" rel="noopener" data-i18n="view_code"></a>
           </div>
         </article>
@@ -184,6 +209,9 @@
           <h3 data-i18n="p2_t"></h3>
           <p data-i18n="p2_d"></p>
           <div class="finding" data-i18n="p2_f"></div>
+          <div class="embed">
+            <iframe src="https://flo.uri.sh/visualisation/29339906/embed" title="Ranking de salud fiscal 1995-2024" loading="lazy" scrolling="no" sandbox="allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+          </div>
           <div class="tags"><span>Python</span><span>Pandas</span><span>Tableau</span><span>Flourish</span><span>IMF API</span></div>
           <div class="links">
             <a href="https://public.tableau.com/views/ViszQ1Q2yQ3/Anlisisfiscalglobal" target="_blank" rel="noopener" data-i18n="l_map"></a>
@@ -196,8 +224,20 @@
         <article class="card">
           <h3 data-i18n="p3_t"></h3>
           <p data-i18n="p3_d"></p>
+          <div class="finding" data-i18n="p3_f1"></div>
+          <div class="finding" data-i18n="p3_f2"></div>
+          <div class="tabs">
+            <button class="on" data-src="https://canmor115.github.io/data-projects/eu-self-employment/mapa_mujeres_2024.html" onclick="setMap(this)" data-i18n="tab_w24"></button>
+            <button data-src="https://canmor115.github.io/data-projects/eu-self-employment/mapa_mujeres_2010.html" onclick="setMap(this)" data-i18n="tab_w10"></button>
+            <button data-src="https://canmor115.github.io/data-projects/eu-self-employment/mapa_regiones_2024.html" onclick="setMap(this)" data-i18n="tab_reg"></button>
+          </div>
+          <div class="embed eu">
+            <iframe id="euframe" src="https://canmor115.github.io/data-projects/eu-self-employment/mapa_mujeres_2024.html" title="Mapa de autoempleo en Europa" loading="lazy"></iframe>
+          </div>
+          <p class="cap" data-i18n="p3_cap"></p>
           <div class="tags"><span>Python</span><span>Pandas</span><span>Folium</span><span>Seaborn</span><span>Eurostat API</span></div>
           <div class="links">
+            <a id="euopen" href="https://canmor115.github.io/data-projects/eu-self-employment/mapa_mujeres_2024.html" target="_blank" rel="noopener" data-i18n="l_fullmap"></a>
             <a href="https://github.com/Canmor115/data-projects" target="_blank" rel="noopener" data-i18n="view_code"></a>
           </div>
         </article>
@@ -315,13 +355,19 @@ const T = {
     proj_h: "Proyectos",
     p1_t: "Credit Risk Prediction",
     p1_d: "Clasificación de solicitantes de crédito (German Credit) con árboles de decisión y modelos de ensamble, evaluados con una matriz de costes asimétrica (FN=5, FP=1). Explicabilidad con Feature Importance, ALE y SHAP.",
-    p1_f: "Perfil de mayor riesgo: solicitantes con saldo negativo que piden préstamos a largo plazo.",
+    p1_f: "Perfil de mayor riesgo: solicitantes con saldo negativo que piden préstamos a largo plazo. El mejor modelo (C5.0 con poda) reduce el coste en torno a un 38% frente a no tener modelo.",
+    p1_cap: "Importancia de las variables en la predicción del impago. El saldo de la cuenta corriente y la duración del préstamo destacan sobre el resto.",
     p2_t: "Salud fiscal de 182 países (1995–2024)",
     p2_d: "Análisis de 30 años de datos del FMI. Tres métricas propias (índice de salud fiscal, dinámica fiscal y puntuación de vulnerabilidad) y un dashboard interactivo en Tableau con linking & brushing.",
     p2_f: "Hallazgo: la riqueza de un país no predice su salud fiscal.",
     p3_t: "Autoempleo en la UE (2010–2024)",
-    p3_d: "Análisis exploratorio del autoempleo en Europa con datos abiertos de Eurostat. Mapas interactivos por región NUTS 2, análisis por género y nivel educativo, y correlación con el desempleo.",
-    view_code: "Ver código",
+    p3_d: "Análisis exploratorio del autoempleo en Europa con datos abiertos de Eurostat. Mapas interactivos por país y por región NUTS 2, análisis por género y nivel educativo, y correlación con el desempleo.",
+    p3_f1: "Las mujeres con formación superior son las que más emprenden, al contrario que los hombres, donde emprenden más los menos cualificados.",
+    p3_f2: "Correlación positiva fuerte (Spearman ~0,99) entre el desempleo femenino con educación superior y el % de mujeres autónomas, lo que apunta a un emprendimiento por necesidad.",
+    tab_w24: "Mujeres 2024", tab_w10: "Mujeres 2010", tab_reg: "Regiones NUTS 2 (2024)",
+    p3_cap: "Porcentaje de mujeres autónomas de 20 a 64 años por país. Pasa el ratón por encima para ver el dato.",
+    l_fullmap: "Abrir mapa a pantalla completa",
+    view_code: "Ver código", l_analysis: "Ver análisis completo",
     l_map: "Mapa, scatter y matriz de riesgo", l_ts: "Austeridad vs. desempleo", l_race: "Ranking 1995–2024",
     l_web: "Web", l_dashb: "Dashboard", l_mobile: "App móvil",
     hack_h: "Hackathons",
@@ -365,13 +411,19 @@ const T = {
     proj_h: "Projects",
     p1_t: "Credit Risk Prediction",
     p1_d: "Classification of credit applicants (German Credit) using decision trees and ensemble models, evaluated under an asymmetric cost matrix (FN=5, FP=1). Explainability with Feature Importance, ALE and SHAP values.",
-    p1_f: "Highest-risk profile: applicants with a negative balance requesting long-term loans.",
+    p1_f: "Highest-risk profile: applicants with a negative balance requesting long-term loans. The best model (pruned C5.0) cuts cost by around 38% compared to having no model.",
+    p1_cap: "Variable importance in predicting default. Checking account balance and loan duration stand out from the rest.",
     p2_t: "Fiscal health of 182 countries (1995–2024)",
     p2_d: "Analysis of 30 years of IMF data. Three custom metrics (fiscal health index, fiscal dynamics and vulnerability score) and an interactive Tableau dashboard with linking & brushing.",
     p2_f: "Finding: a country's wealth doesn't predict its fiscal health.",
     p3_t: "Self-employment in the EU (2010–2024)",
-    p3_d: "Exploratory analysis of self-employment across Europe using open Eurostat data. Interactive maps by NUTS 2 region, gender and education analysis, and correlation with unemployment rates.",
-    view_code: "View code",
+    p3_d: "Exploratory analysis of self-employment across Europe using open Eurostat data. Interactive maps by country and by NUTS 2 region, gender and education analysis, and correlation with unemployment rates.",
+    p3_f1: "Women with higher education are the ones who start businesses the most, unlike men, where the least qualified are the ones who do.",
+    p3_f2: "Strong positive correlation (Spearman ~0.99) between unemployment among highly educated women and the share of self-employed women, pointing to necessity-driven entrepreneurship.",
+    tab_w24: "Women 2024", tab_w10: "Women 2010", tab_reg: "NUTS 2 regions (2024)",
+    p3_cap: "Share of self-employed women aged 20 to 64, by country. Hover over a country to see the figure.",
+    l_fullmap: "Open map full screen",
+    view_code: "View code", l_analysis: "Read full analysis",
     l_map: "Map, scatter and risk matrix", l_ts: "Austerity vs. unemployment", l_race: "Ranking 1995–2024",
     l_web: "Website", l_dashb: "Dashboard", l_mobile: "Mobile app",
     hack_h: "Hackathons",
@@ -416,6 +468,15 @@ function setLang(l) {
   document.getElementById('btn-en').classList.toggle('on', l === 'en');
   document.title = l === 'es' ? 'Camila Moreno | Ciencia de Datos' : 'Camila Moreno | Data Science';
   try { localStorage.setItem('lang', l); } catch (e) {}
+}
+
+function setMap(btn) {
+  var src = btn.getAttribute('data-src');
+  document.getElementById('euframe').src = src;
+  document.getElementById('euopen').href = src;
+  btn.parentNode.querySelectorAll('button').forEach(function (b) {
+    b.classList.toggle('on', b === btn);
+  });
 }
 
 (function () {
