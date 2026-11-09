@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Camila Moreno | Ciencia de Datos</title>
+<meta name="description" content="Junior Data Scientist. Portfolio de Camila Moreno.">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --blue: #1d4ed8;
+    --blue-soft: #e0e9ff;
+    --green: #0f766e;
+    --green-soft: #d9f2ee;
+    --line: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+  header.top {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,250,252,.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 58px; gap: 16px;
+  }
+  .brand { font-weight: 700; color: var(--text); }
+  nav { display: flex; gap: 18px; font-size: .92rem; }
+  nav a { color: var(--muted); }
+  nav a:hover { color: var(--blue); text-decoration: none; }
+  .lang button {
+    border: 1px solid var(--line); background: var(--card);
+    padding: 4px 10px; font-size: .8rem; cursor: pointer; color: var(--muted);
+  }
+  .lang button:first-child { border-radius: 6px 0 0 6px; }
+  .lang button:last-child { border-radius: 0 6px 6px 0; border-left: 0; }
+  .lang button.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+  .hero { padding: 84px 0 56px; }
+  .hero .role {
+    display: inline-block; background: var(--green-soft); color: var(--green);
+    font-size: .82rem; font-weight: 600; padding: 4px 12px; border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.1; margin-bottom: 16px; }
+  .hero h1 span { color: var(--blue); }
+  .hero p { font-size: 1.12rem; color: var(--muted); max-width: 620px; margin-bottom: 28px; }
+  .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: .95rem;
+    border: 1px solid var(--blue);
+  }
+  .btn.primary { background: var(--blue); color: #fff; }
+  .btn.ghost { background: transparent; color: var(--blue); }
+  .btn:hover { text-decoration: none; opacity: .88; }
+
+  section { padding: 52px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 1.5rem; margin-bottom: 22px; }
+  h2::after {
+    content: ""; display: block; width: 36px; height: 3px;
+    background: var(--blue); margin-top: 8px; border-radius: 2px;
+  }
+  .about p + p { margin-top: 14px; }
+
+  .grid { display: grid; gap: 18px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 22px;
+  }
+  .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .card p { color: var(--text); margin-bottom: 10px; }
+  .finding {
+    border-left: 3px solid var(--green); padding-left: 12px;
+    color: var(--muted); font-size: .95rem; margin: 12px 0;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 4px; }
+  .tags span {
+    background: var(--blue-soft); color: var(--blue);
+    font-size: .76rem; font-weight: 600; padding: 3px 9px; border-radius: 6px;
+  }
+  .links { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: .9rem; font-weight: 600; margin-top: 10px; }
+  .award {
+    display: inline-block; background: var(--green-soft); color: var(--green);
+    font-size: .78rem; font-weight: 700; padding: 2px 9px; border-radius: 6px;
+    margin-left: 6px; vertical-align: middle;
+  }
+
+  .job { margin-bottom: 30px; }
+  .job-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; }
+  .job-head strong { font-size: 1.05rem; }
+  .job-head .date { color: var(--muted); font-size: .9rem; }
+  .company { color: var(--blue); font-weight: 600; font-size: .95rem; margin-bottom: 8px; }
+  .job ul { padding-left: 20px; }
+  .job li { margin-bottom: 6px; }
+
+  .cols { display: grid; gap: 28px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .cols { grid-template-columns: 1fr 1fr; } }
+  .skill-row { margin-bottom: 14px; }
+  .skill-row b { display: block; font-size: .88rem; color: var(--muted); margin-bottom: 2px; }
+  .edu-item { margin-bottom: 16px; }
+  .edu-item small { color: var(--muted); display: block; }
+
+  .contact { text-align: center; }
+  .contact h2::after { margin-left: auto; margin-right: auto; }
+  .contact p { color: var(--muted); margin-bottom: 22px; }
+  .contact .btns { justify-content: center; }
+
+  footer { text-align: center; color: var(--muted); font-size: .82rem; padding: 28px 0 40px; }
+
+  @media (max-width: 640px) {
+    nav { display: none; }
+    .hero { padding-top: 56px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand">Camila Moreno</span>
+    <nav>
+      <a href="#about" data-i18n="nav_about"></a>
+      <a href="#projects" data-i18n="nav_projects"></a>
+      <a href="#hackathons" data-i18n="nav_hack"></a>
+      <a href="#experience" data-i18n="nav_exp"></a>
+      <a href="#contact" data-i18n="nav_contact"></a>
+    </nav>
+    <div class="lang">
+      <button id="btn-es" onclick="setLang('es')">ES</button><button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <span class="role" data-i18n="hero_role"></span>
+    <h1>Camila <span>Moreno</span></h1>
+    <p data-i18n="hero_sub"></p>
+    <div class="btns">
+      <a class="btn primary" href="#projects" data-i18n="cta_projects"></a>
+      <a class="btn ghost" href="#contact" data-i18n="cta_contact"></a>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap about">
+      <h2 data-i18n="about_h"></h2>
+      <p data-i18n="about_p1"></p>
+      <p data-i18n="about_p2"></p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <h2 data-i18n="proj_h"></h2>
+      <div class="grid">
+
+        <article class="card">
+          <h3 data-i18n="p1_t"></h3>
+          <p data-i18n="p1_d"></p>
+          <div class="finding" data-i18n="p1_f"></div>
+          <div class="tags"><span>R</span><span>C5.0</span><span>Random Forest</span><span>XGBoost</span><span>SHAP</span><span>ALE</span></div>
+          <div class="links">
+            <a href="https://github.com/Canmor115/data-projects" target="_blank" rel="noopener" data-i18n="view_code"></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3 data-i18n="p2_t"></h3>
+          <p data-i18n="p2_d"></p>
+          <div class="finding" data-i18n="p2_f"></div>
+          <div class="tags"><span>Python</span><span>Pandas</span><span>Tableau</span><span>Flourish</span><span>IMF API</span></div>
+          <div class="links">
+            <a href="https://public.tableau.com/views/ViszQ1Q2yQ3/Anlisisfiscalglobal" target="_blank" rel="noopener" data-i18n="l_map"></a>
+            <a href="https://public.tableau.com/views/ViszQ1Q2yQ3/AusteridadvsDesempleo" target="_blank" rel="noopener" data-i18n="l_ts"></a>
+            <a href="https://public.flourish.studio/visualisation/29339906/" target="_blank" rel="noopener" data-i18n="l_race"></a>
+            <a href="https://github.com/Canmor115/data-projects" target="_blank" rel="noopener" data-i18n="view_code"></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3 data-i18n="p3_t"></h3>
+          <p data-i18n="p3_d"></p>
+          <div class="tags"><span>Python</span><span>Pandas</span><span>Folium</span><span>Seaborn</span><span>Eurostat API</span></div>
+          <div class="links">
+            <a href="https://github.com/Canmor115/data-projects" target="_blank" rel="noopener" data-i18n="view_code"></a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="hackathons">
+    <div class="wrap">
+      <h2 data-i18n="hack_h"></h2>
+      <div class="grid">
+
+        <article class="card">
+          <h3>Hackathon de Avilés <span class="award" data-i18n="award_1"></span></h3>
+          <p data-i18n="h1_d"></p>
+          <div class="tags"><span>V0</span><span data-i18n="tag_public"></span><span data-i18n="tag_sim"></span></div>
+          <div class="links">
+            <a href="https://mapaviles.com/" target="_blank" rel="noopener" data-i18n="l_web"></a>
+            <a href="https://mapaviles-dashboard.vercel.app/" target="_blank" rel="noopener" data-i18n="l_dashb"></a>
+            <a href="https://new-version-aviles-mobile.vercel.app/" target="_blank" rel="noopener" data-i18n="l_mobile"></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Hackathon Ciberseguridad, Clúster TIC Asturias</h3>
+          <p data-i18n="h2_d"></p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <h2 data-i18n="exp_h"></h2>
+
+      <div class="job">
+        <div class="job-head"><strong data-i18n="e1_role"></strong><span class="date">08/2025 – 02/2026</span></div>
+        <div class="company">Chemical Building Project · Macael</div>
+        <ul>
+          <li data-i18n="e1_b1"></li>
+          <li data-i18n="e1_b2"></li>
+          <li data-i18n="e1_b3"></li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head"><strong data-i18n="e2_role"></strong><span class="date">02/2022 – 08/2025</span></div>
+        <div class="company">Cosentino · Cantoria</div>
+        <ul>
+          <li data-i18n="e2_b1"></li>
+          <li data-i18n="e2_b2"></li>
+          <li data-i18n="e2_b3"></li>
+          <li data-i18n="e2_b4"></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap cols">
+      <div>
+        <h2 data-i18n="skills_h"></h2>
+        <div class="skill-row"><b data-i18n="sk_lang"></b>Python (Pandas, NumPy, Scikit-Learn), R, SQL, Bash/AWK, Java</div>
+        <div class="skill-row"><b>Machine Learning</b><span data-i18n="sk_ml"></span></div>
+        <div class="skill-row"><b data-i18n="sk_viz"></b>Tableau, Flourish, Seaborn, Folium, Power BI (<span data-i18n="basic"></span>)</div>
+        <div class="skill-row"><b data-i18n="sk_data"></b><span data-i18n="sk_data_v"></span></div>
+        <div class="skill-row"><b data-i18n="sk_tools"></b>SAP, Git/GitHub, Excel, Scrum</div>
+      </div>
+      <div>
+        <h2 data-i18n="edu_h"></h2>
+        <div class="edu-item">
+          <strong data-i18n="edu1"></strong>
+          <small>Universitat Oberta de Catalunya (UOC) · 2023 – <span data-i18n="now"></span></small>
+          <small data-i18n="edu1_n"></small>
+        </div>
+        <div class="edu-item">
+          <strong data-i18n="edu2"></strong>
+          <small>IES Zaidín Vergeles, Granada · 2020 – 2022</small>
+        </div>
+        <div class="edu-item">
+          <strong data-i18n="lang_h"></strong>
+          <small data-i18n="lang_v"></small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <h2 data-i18n="contact_h"></h2>
+      <p data-i18n="contact_p"></p>
+      <div class="btns">
+        <a class="btn primary" href="mailto:cxcmasaxa@gmail.com">cxcmasaxa@gmail.com</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/camila-andrea-moreno-ortiz" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/Canmor115" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 Camila Moreno</footer>
+
+<script>
+const T = {
+  es: {
+    nav_about: "Sobre mí", nav_projects: "Proyectos", nav_hack: "Hackathons", nav_exp: "Experiencia", nav_contact: "Contacto",
+    hero_role: "Junior Data Scientist · Estudiante de Ciencia de Datos",
+    hero_sub: "Cuatro años validando datos reales en industria, ahora llevándolos a modelos y decisiones. Busco mi primera posición como científica de datos.",
+    cta_projects: "Ver proyectos", cta_contact: "Contactar",
+    about_h: "Sobre mí",
+    about_p1: "Estudio Ciencia de Datos Aplicada en la UOC (graduación prevista en 2027) y vengo de cuatro años en control de calidad y validación de datos en la industria. Estoy acostumbrada a trabajar con datos ruidosos, a detectar desviaciones pronto y a convertirlas en información útil para decidir.",
+    about_p2: "Me interesa el ciclo completo, del dato en bruto a la decisión: limpiar, explorar, modelar y, sobre todo, explicar bien lo que sale. Los proyectos de abajo van en esa línea.",
+    proj_h: "Proyectos",
+    p1_t: "Credit Risk Prediction",
+    p1_d: "Clasificación de solicitantes de crédito (German Credit) con árboles de decisión y modelos de ensamble, evaluados con una matriz de costes asimétrica (FN=5, FP=1). Explicabilidad con Feature Importance, ALE y SHAP.",
+    p1_f: "Perfil de mayor riesgo: solicitantes con saldo negativo que piden préstamos a largo plazo.",
+    p2_t: "Salud fiscal de 182 países (1995–2024)",
+    p2_d: "Análisis de 30 años de datos del FMI. Tres métricas propias (índice de salud fiscal, dinámica fiscal y puntuación de vulnerabilidad) y un dashboard interactivo en Tableau con linking & brushing.",
+    p2_f: "Hallazgo: la riqueza de un país no predice su salud fiscal.",
+    p3_t: "Autoempleo en la UE (2010–2024)",
+    p3_d: "Análisis exploratorio del autoempleo en Europa con datos abiertos de Eurostat. Mapas interactivos por región NUTS 2, análisis por género y nivel educativo, y correlación con el desempleo.",
+    view_code: "Ver código",
+    l_map: "Mapa, scatter y matriz de riesgo", l_ts: "Austeridad vs. desempleo", l_race: "Ranking 1995–2024",
+    l_web: "Web", l_dashb: "Dashboard", l_mobile: "App móvil",
+    hack_h: "Hackathons",
+    award_1: "1.er puesto · Oct. 2026",
+    h1_d: "Mapavilés: app sobre la oferta de ocio de la ciudad con simulación de afluencia a partir de datos públicos, prototipada con herramientas de IA. Me encargué de las fuentes de datos, la definición de la simulación y la presentación del modelo de negocio.",
+    tag_public: "Datos públicos", tag_sim: "Simulación",
+    h2_d: "Detección de dominios que suplantan a empresas para prevenir fraude (2025, con Ewala).",
+    exp_h: "Experiencia",
+    e1_role: "Técnica de Calidad e I+D",
+    e1_b1: "Recepción y control de calidad de materias primas, con un inventario de unas 200 referencias.",
+    e1_b2: "Evaluación de nuevas materias primas en I+D con matrices analíticas y verificaciones estadísticas para detectar problemas antes de producción.",
+    e1_b3: "Análisis de fallos de producción con pruebas de tolerancia, propuestas para anticiparse a fallos futuros e informes sobre la evolución de la calidad frente a semanas y años anteriores.",
+    e2_role: "Analista de Calidad de Datos y Técnica de Laboratorio",
+    e2_b1: "Supervisión de la integridad de datos en todo el ciclo de fabricación, de materia prima a producto final, con SAP, asegurando la trazabilidad para auditorías internacionales.",
+    e2_b2: "Métodos estadísticos para monitorizar fases intermedias de producción y detectar desviaciones de calidad.",
+    e2_b3: "Recogida y limpieza de datos de colorimetría y análisis exploratorio de la frecuencia de coordenadas de color para identificar patrones (paso previo a un modelo predictivo).",
+    e2_b4: "Gestión de incidencias de principio a fin: causas raíz con otros departamentos, propuesta de soluciones y seguimiento hasta el cierre.",
+    skills_h: "Habilidades",
+    sk_lang: "Lenguajes", sk_viz: "Visualización", sk_data: "Datos", sk_tools: "Herramientas",
+    sk_ml: "Regresión (lineal, logística), Random Forest, XGBoost, SHAP, inferencia bayesiana",
+    sk_data_v: "Calidad de datos, control estadístico, ETL, Spark, Hive, HDFS (en formación)",
+    basic: "básico",
+    edu_h: "Educación",
+    edu1: "Grado en Ciencia de Datos Aplicada",
+    edu1_n: "Graduación prevista: 2027. A tiempo completo desde feb. 2026.",
+    edu2: "Técnico Superior en Análisis y Control de Calidad",
+    now: "actualidad",
+    lang_h: "Idiomas",
+    lang_v: "Español (nativo) · Inglés C1",
+    contact_h: "Contacto",
+    contact_p: "Si tienes una oferta, un proyecto o simplemente quieres hablar de datos, escríbeme."
+  },
+  en: {
+    nav_about: "About", nav_projects: "Projects", nav_hack: "Hackathons", nav_exp: "Experience", nav_contact: "Contact",
+    hero_role: "Junior Data Scientist · Data Science Student",
+    hero_sub: "Four years validating real-world industrial data, now taking it into models and decisions. Looking for my first data scientist role.",
+    cta_projects: "View projects", cta_contact: "Get in touch",
+    about_h: "About me",
+    about_p1: "I'm studying Applied Data Science at UOC (expected graduation 2027) and I come from four years in quality control and data validation in industry. I'm used to working with noisy data, spotting deviations early and turning them into information people can decide with.",
+    about_p2: "I care about the whole cycle, from raw data to decision: cleaning, exploring, modelling and, above all, explaining clearly what comes out. The projects below follow that line.",
+    proj_h: "Projects",
+    p1_t: "Credit Risk Prediction",
+    p1_d: "Classification of credit applicants (German Credit) using decision trees and ensemble models, evaluated under an asymmetric cost matrix (FN=5, FP=1). Explainability with Feature Importance, ALE and SHAP values.",
+    p1_f: "Highest-risk profile: applicants with a negative balance requesting long-term loans.",
+    p2_t: "Fiscal health of 182 countries (1995–2024)",
+    p2_d: "Analysis of 30 years of IMF data. Three custom metrics (fiscal health index, fiscal dynamics and vulnerability score) and an interactive Tableau dashboard with linking & brushing.",
+    p2_f: "Finding: a country's wealth doesn't predict its fiscal health.",
+    p3_t: "Self-employment in the EU (2010–2024)",
+    p3_d: "Exploratory analysis of self-employment across Europe using open Eurostat data. Interactive maps by NUTS 2 region, gender and education analysis, and correlation with unemployment rates.",
+    view_code: "View code",
+    l_map: "Map, scatter and risk matrix", l_ts: "Austerity vs. unemployment", l_race: "Ranking 1995–2024",
+    l_web: "Website", l_dashb: "Dashboard", l_mobile: "Mobile app",
+    hack_h: "Hackathons",
+    award_1: "1st place · Oct. 2026",
+    h1_d: "Mapavilés: an app about the city's leisure offer with crowd simulation built from public data, prototyped with AI tools. I handled data sources, the simulation design and the business model presentation.",
+    tag_public: "Public data", tag_sim: "Simulation",
+    h2_d: "Detection of domains impersonating companies to prevent fraud (2025, with Ewala).",
+    exp_h: "Experience",
+    e1_role: "Quality and R&D Technician",
+    e1_b1: "Incoming quality control of raw materials, covering an inventory of around 200 references.",
+    e1_b2: "Evaluation of new raw materials in R&D using analytical matrices and statistical checks to catch problems before production.",
+    e1_b3: "Production failure analysis with tolerance tests, proposals to anticipate future failures, and reports on quality trends against previous weeks and years.",
+    e2_role: "Data Quality Analyst and Laboratory Technician",
+    e2_b1: "Oversight of data integrity across the whole manufacturing cycle, from raw material to finished product, using SAP and ensuring traceability for international audits.",
+    e2_b2: "Statistical methods to monitor intermediate production stages and detect quality deviations.",
+    e2_b3: "Collection and cleaning of colorimetry data and exploratory analysis of colour coordinate frequencies to identify patterns (groundwork for a predictive model).",
+    e2_b4: "End-to-end incident management: root causes with other departments, proposed solutions and follow-up until closure.",
+    skills_h: "Skills",
+    sk_lang: "Languages", sk_viz: "Visualization", sk_data: "Data", sk_tools: "Tools",
+    sk_ml: "Regression (linear, logistic), Random Forest, XGBoost, SHAP, Bayesian inference",
+    sk_data_v: "Data quality, statistical process control, ETL, Spark, Hive, HDFS (learning)",
+    basic: "basic",
+    edu_h: "Education",
+    edu1: "BSc in Applied Data Science",
+    edu1_n: "Expected graduation: 2027. Full time since Feb. 2026.",
+    edu2: "Higher Technician in Quality Analysis and Control",
+    now: "present",
+    lang_h: "Languages",
+    lang_v: "Spanish (native) · English C1",
+    contact_h: "Contact",
+    contact_p: "If you have an opening, a project, or just want to talk data, drop me a line."
+  }
+};
+
+function setLang(l) {
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var v = T[l][el.getAttribute('data-i18n')];
+    if (v !== undefined) el.textContent = v;
+  });
+  document.getElementById('btn-es').classList.toggle('on', l === 'es');
+  document.getElementById('btn-en').classList.toggle('on', l === 'en');
+  document.title = l === 'es' ? 'Camila Moreno | Ciencia de Datos' : 'Camila Moreno | Data Science';
+  try { localStorage.setItem('lang', l); } catch (e) {}
+}
+
+(function () {
+  var l = null;
+  try { l = localStorage.getItem('lang'); } catch (e) {}
+  if (l !== 'es' && l !== 'en') {
+    l = (navigator.language || 'es').toLowerCase().indexOf('en') === 0 ? 'en' : 'es';
+  }
+  setLang(l);
+})();
+</script>
+</body>
+</html>
