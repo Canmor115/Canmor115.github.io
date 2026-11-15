@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Camila Moreno | Ciencia de Datos</title>
 <meta name="description" content="Junior Data Scientist. Portfolio de Camila Moreno.">
+<meta name="theme-color" content="#F6F2EA">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Camila Moreno | Ciencia de Datos">
 <meta property="og:description" content="Junior Data Scientist. Proyectos de datos, modelos y visualización.">
@@ -13,15 +15,17 @@
 <meta name="twitter:card" content="summary_large_image">
 <style>
   :root {
-    --bg: #F7F3EC;
+    --bg: #F6F2EA;
     --card: #FFFDF9;
-    --text: #1E293B;
+    --text: #1F2430;
     --muted: #6B6B6B;
-    --blue: #1D4ED8;
-    --blue-soft: #E3EAFB;
-    --green: #0F766E;
-    --green-soft: #D9F2EE;
-    --line: #E7E0D4;
+    --accent: #1E3A8A;
+    --accent-soft: #E6EAF5;
+    --gold: #8A6D2F;
+    --gold-line: #B8975A;
+    --gold-soft: #F1E8D3;
+    --line: #E6DECF;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -31,13 +35,13 @@
     color: var(--text);
     line-height: 1.65;
   }
-  a { color: var(--blue); text-decoration: none; }
+  a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
 
   header.top {
     position: sticky; top: 0; z-index: 10;
-    background: rgba(247,243,236,.92);
+    background: rgba(246,242,234,.92);
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--line);
   }
@@ -45,34 +49,37 @@
     display: flex; align-items: center; justify-content: space-between;
     height: 58px; gap: 16px;
   }
-  .brand { font-weight: 700; color: var(--text); }
+  .brand { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; color: var(--text); }
   nav { display: flex; gap: 18px; font-size: .92rem; }
   nav a { color: var(--muted); }
-  nav a:hover { color: var(--blue); text-decoration: none; }
+  nav a:hover { color: var(--accent); text-decoration: none; }
   .lang button {
     border: 1px solid var(--line); background: var(--card);
     padding: 4px 10px; font-size: .8rem; cursor: pointer; color: var(--muted);
   }
   .lang button:first-child { border-radius: 6px 0 0 6px; }
   .lang button:last-child { border-radius: 0 6px 6px 0; border-left: 0; }
-  .lang button.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .lang button.on { background: var(--accent); color: #fff; border-color: var(--accent); }
 
   .hero { padding: 84px 0 56px; }
   .hero .role {
-    display: inline-block; background: var(--green-soft); color: var(--green);
+    display: inline-block; background: var(--gold-soft); color: var(--gold);
     font-size: .82rem; font-weight: 600; padding: 4px 12px; border-radius: 999px;
     margin-bottom: 18px;
   }
-  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.1; margin-bottom: 16px; }
-  .hero h1 span { color: var(--blue); }
+  .hero h1 {
+    font-family: var(--serif); font-weight: 600; letter-spacing: -.01em;
+    font-size: clamp(2.4rem, 6.5vw, 3.8rem); line-height: 1.08; margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--accent); font-style: italic; }
   .hero p { font-size: 1.12rem; color: var(--muted); max-width: 620px; margin-bottom: 28px; }
   .btns { display: flex; gap: 12px; flex-wrap: wrap; }
   .btn {
     padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: .95rem;
-    border: 1px solid var(--blue);
+    border: 1px solid var(--accent);
   }
-  .btn.primary { background: var(--blue); color: #fff; }
-  .btn.ghost { background: transparent; color: var(--blue); }
+  .btn.primary { background: var(--accent); color: #fff; }
+  .btn.ghost { background: transparent; color: var(--accent); }
   .btn:hover { text-decoration: none; opacity: .88; }
 
   /* Tira de tecnologías en movimiento */
@@ -89,21 +96,23 @@
   .marquee:hover .track { animation-play-state: paused; }
   @keyframes marquee { to { transform: translateX(-50%); } }
   .pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-right: 12px; padding: 7px 14px;
+    display: inline-flex; align-items: center; gap: 9px;
+    margin-right: 12px; padding: 7px 15px 7px 10px;
     background: var(--card); border: 1px solid var(--line); border-radius: 999px;
     font-size: .88rem; font-weight: 600; white-space: nowrap;
   }
-  .pill::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); }
-  .pill.k-m::before { background: var(--green); }
-  .pill.k-v::before { background: #D97706; }
-  .pill.k-t::before { background: #94A3B8; }
+  .pill img, .pill .ico { width: 18px; height: 18px; flex: none; }
+  .pill .ico {
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 5px; background: var(--accent-soft); color: var(--accent);
+    font-size: .68rem; font-weight: 700;
+  }
 
-  section { padding: 52px 0; border-top: 1px solid var(--line); }
-  h2 { font-size: 1.5rem; margin-bottom: 22px; }
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: 1.8rem; margin-bottom: 24px; }
   h2::after {
-    content: ""; display: block; width: 36px; height: 3px;
-    background: var(--blue); margin-top: 8px; border-radius: 2px;
+    content: ""; display: block; width: 40px; height: 2px;
+    background: var(--gold-line); margin-top: 10px; border-radius: 2px;
   }
   .about p + p { margin-top: 14px; }
 
@@ -116,19 +125,19 @@
   @media (hover: hover) {
     .card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 14px 30px rgba(30, 41, 59, .10);
+      box-shadow: 0 14px 30px rgba(31, 36, 48, .09);
       border-color: #D8CDBB;
     }
   }
-  .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .card h3 { font-family: var(--serif); font-weight: 600; font-size: 1.25rem; margin-bottom: 8px; }
   .card p { color: var(--text); margin-bottom: 10px; }
   .finding {
-    border-left: 3px solid var(--green); padding-left: 12px;
+    border-left: 2px solid var(--gold-line); padding-left: 12px;
     color: var(--muted); font-size: .95rem; margin: 12px 0;
   }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 4px; }
   .tags span {
-    background: var(--blue-soft); color: var(--blue);
+    background: var(--accent-soft); color: var(--accent);
     font-size: .76rem; font-weight: 600; padding: 3px 9px; border-radius: 6px;
   }
   .links { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: .9rem; font-weight: 600; margin-top: 10px; }
@@ -137,25 +146,25 @@
   .eyebrow {
     display: block; margin-bottom: 6px;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: .74rem; color: var(--blue); letter-spacing: .02em;
+    font-size: .74rem; color: var(--gold); letter-spacing: .02em;
   }
   .badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 10px; }
   .status, .award {
     display: inline-flex; align-items: center; gap: 7px;
     font-size: .78rem; font-weight: 700; padding: 3px 10px; border-radius: 999px;
   }
-  .status { color: var(--green); background: var(--green-soft); }
-  .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
-  .award { color: #92400E; background: #FDEBD0; }
+  .status { color: var(--accent); background: var(--accent-soft); }
+  .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .award { color: var(--gold); background: var(--gold-soft); }
 
   /* Marco tipo ventana de navegador */
   .frame {
     border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
-    background: #fff; box-shadow: 0 10px 30px rgba(30, 41, 59, .08);
+    background: #fff; box-shadow: 0 10px 30px rgba(31, 36, 48, .07);
   }
   .bar {
     display: flex; align-items: center; gap: 6px;
-    padding: 9px 12px; background: #F1EBDF; border-bottom: 1px solid var(--line);
+    padding: 9px 12px; background: #EFE8DA; border-bottom: 1px solid var(--line);
   }
   .bar i { width: 9px; height: 9px; border-radius: 50%; background: #D8CDBB; flex: none; }
   .bar span {
@@ -171,11 +180,11 @@
     display: grid; grid-template-columns: 1fr 1.1fr; gap: 28px; align-items: center;
     background: var(--card); border: 1px solid var(--line); border-radius: 16px;
     padding: 28px; margin-bottom: 18px;
-    box-shadow: 0 10px 30px rgba(30, 41, 59, .06);
+    box-shadow: 0 10px 30px rgba(31, 36, 48, .05);
   }
   .ftitle { display: flex; align-items: center; gap: 14px; }
   .ftitle img { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; flex: none; }
-  .ftitle h3 { font-size: 1.6rem; line-height: 1.15; }
+  .ftitle h3 { font-family: var(--serif); font-weight: 600; font-size: 1.8rem; line-height: 1.15; }
   .feature p { margin-bottom: 10px; }
 
   /* Proyectos en filas alternas */
@@ -185,7 +194,7 @@
   }
   .proj:last-child { margin-bottom: 0; }
   .proj.flip .pmedia { order: -1; }
-  .ptext h3 { font-size: 1.3rem; line-height: 1.25; margin-bottom: 8px; }
+  .ptext h3 { font-family: var(--serif); font-weight: 600; font-size: 1.4rem; line-height: 1.25; margin-bottom: 8px; }
   .ptext p { margin-bottom: 10px; }
   .pmedia .cap { margin-top: 8px; }
 
@@ -194,13 +203,13 @@
     border: 1px solid var(--line); background: var(--card); color: var(--muted);
     font-size: .82rem; padding: 5px 12px; border-radius: 999px; cursor: pointer;
   }
-  .tabs button.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .tabs button.on { background: var(--accent); color: #fff; border-color: var(--accent); }
 
   .job { margin-bottom: 30px; }
   .job-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; }
-  .job-head strong { font-size: 1.05rem; }
+  .job-head strong { font-family: var(--serif); font-size: 1.12rem; }
   .job-head .date { color: var(--muted); font-size: .9rem; }
-  .company { color: var(--blue); font-weight: 600; font-size: .95rem; margin-bottom: 8px; }
+  .company { color: var(--accent); font-weight: 600; font-size: .95rem; margin-bottom: 8px; }
   .job ul { padding-left: 20px; }
   .job li { margin-bottom: 6px; }
 
@@ -209,6 +218,7 @@
   .skill-row { margin-bottom: 14px; }
   .skill-row b { display: block; font-size: .88rem; color: var(--muted); margin-bottom: 2px; }
   .edu-item { margin-bottom: 16px; }
+  .edu-item strong { font-family: var(--serif); font-size: 1.05rem; }
   .edu-item small { color: var(--muted); display: block; }
 
   .contact { text-align: center; }
@@ -487,7 +497,7 @@ const T = {
     hero_sub: "Cuatro años validando datos reales en industria, ahora llevándolos a modelos y decisiones. Busco mi primera posición como científica de datos.",
     cta_projects: "Ver proyectos", cta_contact: "Contactar",
     about_h: "Sobre mí",
-    about_p1: "Estudio Ciencia de Datos Aplicada en la UOC (graduación prevista en 2027) y vengo de cuatro años en control de calidad y validación de datos en la industria. Estoy acostumbrada a trabajar con datos ruidosos, a detectar desviaciones pronto y a convertirlas en información útil para decidir.",
+    about_p1: "Estudio Ciencia de Datos Aplicada en la UOC (graduación prevista en enero de 2028) y vengo de cuatro años en control de calidad y validación de datos en la industria. Estoy acostumbrada a trabajar con datos ruidosos, a detectar desviaciones pronto y a convertirlas en información útil para decidir.",
     about_p2: "Me interesa el ciclo completo, del dato en bruto a la decisión: limpiar, explorar, modelar y, sobre todo, explicar bien lo que sale. Más abajo puedes ver los hackathons en los que he participado y mis proyectos.",
     proj_h: "Proyectos",
     p1_k: "Proyecto de modelización",
@@ -537,7 +547,7 @@ const T = {
     basic: "básico",
     edu_h: "Educación",
     edu1: "Grado en Ciencia de Datos Aplicada",
-    edu1_n: "Graduación prevista: 2027. A tiempo completo desde feb. 2026.",
+    edu1_n: "Graduación prevista: enero de 2028. A tiempo completo desde feb. 2026.",
     edu2: "Técnico Superior en Análisis y Control de Calidad",
     now: "actualidad",
     lang_h: "Idiomas",
@@ -551,7 +561,7 @@ const T = {
     hero_sub: "Four years validating real-world industrial data, now taking it into models and decisions. Looking for my first data scientist role.",
     cta_projects: "View projects", cta_contact: "Get in touch",
     about_h: "About me",
-    about_p1: "I'm studying Applied Data Science at UOC (expected graduation 2027) and I come from four years in quality control and data validation in industry. I'm used to working with noisy data, spotting deviations early and turning them into information people can decide with.",
+    about_p1: "I'm studying Applied Data Science at UOC (expected graduation January 2028) and I come from four years in quality control and data validation in industry. I'm used to working with noisy data, spotting deviations early and turning them into information people can decide with.",
     about_p2: "I care about the whole cycle, from raw data to decision: cleaning, exploring, modelling and, above all, explaining clearly what comes out. Below you can see the hackathons I've taken part in and my projects.",
     proj_h: "Projects",
     p1_k: "Modelling project",
@@ -601,7 +611,7 @@ const T = {
     basic: "basic",
     edu_h: "Education",
     edu1: "BSc in Applied Data Science",
-    edu1_n: "Expected graduation: 2027. Full time since Feb. 2026.",
+    edu1_n: "Expected graduation: January 2028. Full time since Feb. 2026.",
     edu2: "Higher Technician in Quality Analysis and Control",
     now: "present",
     lang_h: "Languages",
@@ -641,21 +651,43 @@ function setMap(btn) {
   setLang(l);
 })();
 
-// Tira de tecnologías: l = lenguajes, m = machine learning, v = visualización, t = herramientas
+// Tira de tecnologías con logos (Simple Icons). Si no hay logo o no carga, sale la inicial.
+// Para ajustar un logo, cambia el segundo valor de cada pareja (el nombre en simpleicons.org).
 (function () {
   var tech = [
-    ["Python","l"],["R","l"],["SQL","l"],["Java","l"],["Bash","l"],
-    ["Pandas","m"],["NumPy","m"],["Scikit-Learn","m"],["XGBoost","m"],["Random Forest","m"],["SHAP","m"],
-    ["Tableau","v"],["Flourish","v"],["Seaborn","v"],["Folium","v"],
-    ["Git / GitHub","t"],["SAP","t"],["Excel","t"]
+    ["Python","python"],["R","r"],["SQL",null],["Java","openjdk"],["Bash","gnubash"],
+    ["Pandas","pandas"],["NumPy","numpy"],["Scikit-Learn","scikitlearn"],["XGBoost",null],["Random Forest",null],["SHAP",null],
+    ["Tableau","tableau"],["Flourish",null],["Seaborn",null],["Folium",null],
+    ["Git / GitHub","github"],["SAP","sap"],["Excel","microsoftexcel"]
   ];
-  var html = "";
+  var track = document.getElementById('track');
+  function badge(name) {
+    var s = document.createElement('span');
+    s.className = 'ico';
+    s.textContent = name.charAt(0);
+    return s;
+  }
   for (var i = 0; i < 4; i++) {
     tech.forEach(function (t) {
-      html += '<span class="pill k-' + t[1] + '"' + (i > 0 ? ' data-dup' : '') + '>' + t[0] + '</span>';
+      var pill = document.createElement('span');
+      pill.className = 'pill';
+      if (i > 0) pill.setAttribute('data-dup', '');
+      var ico;
+      if (t[1]) {
+        ico = document.createElement('img');
+        ico.alt = '';
+        ico.width = 18; ico.height = 18;
+        ico.referrerPolicy = 'no-referrer';
+        ico.onerror = function () { ico.replaceWith(badge(t[0])); };
+        ico.src = 'https://cdn.simpleicons.org/' + t[1];
+      } else {
+        ico = badge(t[0]);
+      }
+      pill.appendChild(ico);
+      pill.appendChild(document.createTextNode(t[0]));
+      track.appendChild(pill);
     });
   }
-  document.getElementById('track').innerHTML = html;
 })();
 
 // Aparición suave al hacer scroll
