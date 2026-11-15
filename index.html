@@ -75,6 +75,30 @@
   .btn.ghost { background: transparent; color: var(--blue); }
   .btn:hover { text-decoration: none; opacity: .88; }
 
+  /* Tira de tecnologías en movimiento */
+  .marquee {
+    overflow: hidden; padding: 18px 0;
+    border-top: 1px solid var(--line);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+  .track {
+    display: flex; width: max-content;
+    animation: marquee 50s linear infinite;
+  }
+  .marquee:hover .track { animation-play-state: paused; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-right: 12px; padding: 7px 14px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+    font-size: .88rem; font-weight: 600; white-space: nowrap;
+  }
+  .pill::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); }
+  .pill.k-m::before { background: var(--green); }
+  .pill.k-v::before { background: #D97706; }
+  .pill.k-t::before { background: #94A3B8; }
+
   section { padding: 52px 0; border-top: 1px solid var(--line); }
   h2 { font-size: 1.5rem; margin-bottom: 22px; }
   h2::after {
@@ -87,6 +111,14 @@
   .card {
     background: var(--card); border: 1px solid var(--line);
     border-radius: 12px; padding: 22px;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  @media (hover: hover) {
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(30, 41, 59, .10);
+      border-color: #D8CDBB;
+    }
   }
   .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
   .card p { color: var(--text); margin-bottom: 10px; }
@@ -100,31 +132,69 @@
     font-size: .76rem; font-weight: 600; padding: 3px 9px; border-radius: 6px;
   }
   .links { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: .9rem; font-weight: 600; margin-top: 10px; }
-  .award {
-    display: inline-block; background: var(--green-soft); color: var(--green);
-    font-size: .78rem; font-weight: 700; padding: 2px 9px; border-radius: 6px;
-    margin-left: 6px; vertical-align: middle;
-  }
-
-  .shot { display: block; margin: 14px 0 6px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
-  .shot img { display: block; width: 100%; height: auto; max-height: 420px; object-fit: contain; background: #fff; }
   .cap { font-size: .82rem; color: var(--muted); margin: 0 0 8px; }
 
-  .embed { margin: 14px 0 6px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
-  .embed iframe { display: block; width: 100%; height: 520px; border: 0; }
-  .embed.eu iframe { height: 440px; }
-  @media (max-width: 640px) {
-    .embed iframe { height: 420px; }
-    .embed.eu iframe { height: 380px; }
+  .eyebrow {
+    display: block; margin-bottom: 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .74rem; color: var(--blue); letter-spacing: .02em;
   }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 10px; }
+  .status, .award {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: .78rem; font-weight: 700; padding: 3px 10px; border-radius: 999px;
+  }
+  .status { color: var(--green); background: var(--green-soft); }
+  .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+  .award { color: #92400E; background: #FDEBD0; }
 
-  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; }
+  /* Marco tipo ventana de navegador */
+  .frame {
+    border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+    background: #fff; box-shadow: 0 10px 30px rgba(30, 41, 59, .08);
+  }
+  .bar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 9px 12px; background: #F1EBDF; border-bottom: 1px solid var(--line);
+  }
+  .bar i { width: 9px; height: 9px; border-radius: 50%; background: #D8CDBB; flex: none; }
+  .bar span {
+    flex: 1; min-width: 0; margin-left: 8px; padding: 2px 10px;
+    font-size: .72rem; color: var(--muted); background: #fff; border-radius: 6px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .frame img { display: block; width: 100%; height: auto; background: #fff; }
+  .frame iframe { display: block; width: 100%; height: 380px; border: 0; }
+
+  /* Bloque protagonista: Mapavilés */
+  .feature {
+    display: grid; grid-template-columns: 1fr 1.1fr; gap: 28px; align-items: center;
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 28px; margin-bottom: 18px;
+    box-shadow: 0 10px 30px rgba(30, 41, 59, .06);
+  }
+  .ftitle { display: flex; align-items: center; gap: 14px; }
+  .ftitle img { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; flex: none; }
+  .ftitle h3 { font-size: 1.6rem; line-height: 1.15; }
+  .feature p { margin-bottom: 10px; }
+
+  /* Proyectos en filas alternas */
+  .proj {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;
+    margin-bottom: 52px;
+  }
+  .proj:last-child { margin-bottom: 0; }
+  .proj.flip .pmedia { order: -1; }
+  .ptext h3 { font-size: 1.3rem; line-height: 1.25; margin-bottom: 8px; }
+  .ptext p { margin-bottom: 10px; }
+  .pmedia .cap { margin-top: 8px; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
   .tabs button {
     border: 1px solid var(--line); background: var(--card); color: var(--muted);
     font-size: .82rem; padding: 5px 12px; border-radius: 999px; cursor: pointer;
   }
   .tabs button.on { background: var(--blue); color: #fff; border-color: var(--blue); }
-  .tabs + .embed { margin-top: 10px; }
 
   .job { margin-bottom: 30px; }
   .job-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; }
@@ -148,9 +218,29 @@
 
   footer { text-align: center; color: var(--muted); font-size: .82rem; padding: 28px 0 40px; }
 
+  @media (max-width: 800px) {
+    .feature, .proj { grid-template-columns: 1fr; gap: 20px; }
+    .proj.flip .pmedia { order: 0; }
+    .feature { padding: 20px; }
+    .proj { margin-bottom: 44px; }
+  }
   @media (max-width: 640px) {
     nav { display: none; }
     .hero { padding-top: 56px; }
+    .frame iframe { height: 340px; }
+  }
+
+  /* Aparición suave al hacer scroll */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .marquee { -webkit-mask-image: none; mask-image: none; }
+    .track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; padding: 0 20px; row-gap: 10px; }
+    .pill[data-dup] { display: none; }
+    .card, .card:hover { transition: none; transform: none; }
   }
 </style>
 </head>
@@ -183,6 +273,8 @@
     </div>
   </div>
 
+  <div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+
   <section id="about">
     <div class="wrap about">
       <h2 data-i18n="about_h"></h2>
@@ -194,10 +286,20 @@
   <section id="hackathons">
     <div class="wrap">
       <h2 data-i18n="hack_h"></h2>
-      <div class="grid">
 
-        <article class="card">
-          <h3>Hackathon de Avilés <span class="award" data-i18n="award_1"></span></h3>
+      <article class="feature">
+        <div class="ptext">
+          <div class="ftitle">
+            <img src="mapaviles_logo.png" alt="Logo de Mapavilés" loading="lazy">
+            <div>
+              <span class="eyebrow" data-i18n="h1_name"></span>
+              <h3>Mapavilés</h3>
+            </div>
+          </div>
+          <div class="badges">
+            <span class="status" data-i18n="status_dev"></span>
+            <span class="award" data-i18n="award_1"></span>
+          </div>
           <p data-i18n="h1_d"></p>
           <div class="tags"><span>V0</span><span data-i18n="tag_public"></span><span data-i18n="tag_sim"></span></div>
           <div class="links">
@@ -205,47 +307,61 @@
             <a href="https://mapaviles-dashboard.vercel.app/" target="_blank" rel="noopener" data-i18n="l_dashb"></a>
             <a href="https://new-version-aviles-mobile.vercel.app/" target="_blank" rel="noopener" data-i18n="l_mobile"></a>
           </div>
-        </article>
+        </div>
+        <div class="pmedia">
+          <div class="frame">
+            <div class="bar"><i></i><i></i><i></i><span>mapaviles-dashboard.vercel.app</span></div>
+            <a href="https://mapaviles-dashboard.vercel.app/" target="_blank" rel="noopener">
+              <img src="mapaviles_dashboard.png" alt="Dashboard de Mapavilés" loading="lazy">
+            </a>
+          </div>
+        </div>
+      </article>
 
-        <article class="card">
-          <h3>Typosquat Hunter · domainEYE</h3>
-          <p class="cap" data-i18n="h2_meta"></p>
-          <p data-i18n="h2_d"></p>
-          <p data-i18n="h2_d2"></p>
-          <div class="tags"><span>OSINT</span><span>Typosquatting</span><span data-i18n="tag_scoring"></span><span>Levenshtein</span></div>
-        </article>
+      <article class="card">
+        <span class="eyebrow" data-i18n="h2_meta"></span>
+        <h3>Typosquat Hunter · domainEYE</h3>
+        <p data-i18n="h2_d"></p>
+        <p data-i18n="h2_d2"></p>
+        <div class="tags"><span>OSINT</span><span>Typosquatting</span><span data-i18n="tag_scoring"></span><span>Levenshtein</span></div>
+      </article>
 
-      </div>
     </div>
   </section>
 
   <section id="projects">
     <div class="wrap">
       <h2 data-i18n="proj_h"></h2>
-      <div class="grid">
 
-        <article class="card">
+      <article class="proj">
+        <div class="ptext">
+          <span class="eyebrow" data-i18n="p1_k"></span>
           <h3 data-i18n="p1_t"></h3>
           <p data-i18n="p1_d"></p>
           <div class="finding" data-i18n="p1_f"></div>
-          <a class="shot" href="https://canmor115.github.io/data-projects/credit-risk-prediction/credit_risks_analysis.html" target="_blank" rel="noopener">
-            <img src="https://canmor115.github.io/data-projects/credit-risk-prediction/feature_importance.png" alt="Importancia de variables en el modelo de riesgo de crédito" loading="lazy">
-          </a>
-          <p class="cap" data-i18n="p1_cap"></p>
           <div class="tags"><span>R</span><span>C5.0</span><span>Random Forest</span><span>XGBoost</span><span>SHAP</span><span>ALE</span></div>
           <div class="links">
             <a href="https://canmor115.github.io/data-projects/credit-risk-prediction/credit_risks_analysis.html" target="_blank" rel="noopener" data-i18n="l_analysis"></a>
             <a href="https://github.com/Canmor115/data-projects" target="_blank" rel="noopener" data-i18n="view_code"></a>
           </div>
-        </article>
+        </div>
+        <div class="pmedia">
+          <div class="frame">
+            <div class="bar"><i></i><i></i><i></i><span>credit_risks_analysis.html</span></div>
+            <a href="https://canmor115.github.io/data-projects/credit-risk-prediction/credit_risks_analysis.html" target="_blank" rel="noopener">
+              <img src="https://canmor115.github.io/data-projects/credit-risk-prediction/feature_importance.png" alt="Importancia de variables en el modelo de riesgo de crédito" loading="lazy">
+            </a>
+          </div>
+          <p class="cap" data-i18n="p1_cap"></p>
+        </div>
+      </article>
 
-        <article class="card">
+      <article class="proj flip">
+        <div class="ptext">
+          <span class="eyebrow" data-i18n="p2_k"></span>
           <h3 data-i18n="p2_t"></h3>
           <p data-i18n="p2_d"></p>
           <div class="finding" data-i18n="p2_f"></div>
-          <div class="embed">
-            <iframe src="https://flo.uri.sh/visualisation/29339906/embed" title="Ranking de salud fiscal 1995-2024" loading="lazy" scrolling="no" sandbox="allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
-          </div>
           <div class="tags"><span>Python</span><span>Pandas</span><span>Tableau</span><span>Flourish</span><span>IMF API</span></div>
           <div class="links">
             <a href="https://public.tableau.com/views/ViszQ1Q2yQ3/Anlisisfiscalglobal" target="_blank" rel="noopener" data-i18n="l_map"></a>
@@ -253,30 +369,42 @@
             <a href="https://public.flourish.studio/visualisation/29339906/" target="_blank" rel="noopener" data-i18n="l_race"></a>
             <a href="https://github.com/Canmor115/data-projects" target="_blank" rel="noopener" data-i18n="view_code"></a>
           </div>
-        </article>
+        </div>
+        <div class="pmedia">
+          <div class="frame">
+            <div class="bar"><i></i><i></i><i></i><span>flourish.studio</span></div>
+            <iframe src="https://flo.uri.sh/visualisation/29339906/embed" title="Ranking de salud fiscal 1995-2024" loading="lazy" scrolling="no" sandbox="allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+          </div>
+        </div>
+      </article>
 
-        <article class="card">
+      <article class="proj">
+        <div class="ptext">
+          <span class="eyebrow" data-i18n="p3_k"></span>
           <h3 data-i18n="p3_t"></h3>
           <p data-i18n="p3_d"></p>
           <div class="finding" data-i18n="p3_f1"></div>
           <div class="finding" data-i18n="p3_f2"></div>
-          <div class="tabs">
-            <button class="on" data-src="https://canmor115.github.io/data-projects/eu-self-employment/mapa_mujeres_2024.html" onclick="setMap(this)" data-i18n="tab_w24"></button>
-            <button data-src="https://canmor115.github.io/data-projects/eu-self-employment/mapa_mujeres_2010.html" onclick="setMap(this)" data-i18n="tab_w10"></button>
-            <button data-src="https://canmor115.github.io/data-projects/eu-self-employment/mapa_regiones_2024.html" onclick="setMap(this)" data-i18n="tab_reg"></button>
-          </div>
-          <div class="embed eu">
-            <iframe id="euframe" src="https://canmor115.github.io/data-projects/eu-self-employment/mapa_mujeres_2024.html" title="Mapa de autoempleo en Europa" loading="lazy"></iframe>
-          </div>
-          <p class="cap" data-i18n="p3_cap"></p>
           <div class="tags"><span>Python</span><span>Pandas</span><span>Folium</span><span>Seaborn</span><span>Eurostat API</span></div>
           <div class="links">
             <a id="euopen" href="https://canmor115.github.io/data-projects/eu-self-employment/mapa_mujeres_2024.html" target="_blank" rel="noopener" data-i18n="l_fullmap"></a>
             <a href="https://github.com/Canmor115/data-projects" target="_blank" rel="noopener" data-i18n="view_code"></a>
           </div>
-        </article>
+        </div>
+        <div class="pmedia">
+          <div class="tabs">
+            <button class="on" data-src="https://canmor115.github.io/data-projects/eu-self-employment/mapa_mujeres_2024.html" onclick="setMap(this)" data-i18n="tab_w24"></button>
+            <button data-src="https://canmor115.github.io/data-projects/eu-self-employment/mapa_mujeres_2010.html" onclick="setMap(this)" data-i18n="tab_w10"></button>
+            <button data-src="https://canmor115.github.io/data-projects/eu-self-employment/mapa_regiones_2024.html" onclick="setMap(this)" data-i18n="tab_reg"></button>
+          </div>
+          <div class="frame">
+            <div class="bar"><i></i><i></i><i></i><span>canmor115.github.io</span></div>
+            <iframe id="euframe" src="https://canmor115.github.io/data-projects/eu-self-employment/mapa_mujeres_2024.html" title="Mapa de autoempleo en Europa" loading="lazy"></iframe>
+          </div>
+          <p class="cap" data-i18n="p3_cap"></p>
+        </div>
+      </article>
 
-      </div>
     </div>
   </section>
 
@@ -362,13 +490,16 @@ const T = {
     about_p1: "Estudio Ciencia de Datos Aplicada en la UOC (graduación prevista en 2027) y vengo de cuatro años en control de calidad y validación de datos en la industria. Estoy acostumbrada a trabajar con datos ruidosos, a detectar desviaciones pronto y a convertirlas en información útil para decidir.",
     about_p2: "Me interesa el ciclo completo, del dato en bruto a la decisión: limpiar, explorar, modelar y, sobre todo, explicar bien lo que sale. Más abajo puedes ver los hackathons en los que he participado y mis proyectos.",
     proj_h: "Proyectos",
+    p1_k: "Proyecto de modelización",
     p1_t: "Credit Risk Prediction",
     p1_d: "Clasificación de solicitantes de crédito (German Credit) con árboles de decisión y modelos de ensamble, evaluados con una matriz de costes asimétrica (FN=5, FP=1). Explicabilidad con Feature Importance, ALE y SHAP.",
     p1_f: "Perfil de mayor riesgo: solicitantes con saldo negativo que piden préstamos a largo plazo. El mejor modelo (C5.0 con poda) reduce el coste en torno a un 38% frente a no tener modelo.",
     p1_cap: "Importancia de las variables en la predicción del impago. El saldo de la cuenta corriente y la duración del préstamo destacan sobre el resto.",
+    p2_k: "Análisis y visualización",
     p2_t: "Salud fiscal de 182 países (1995–2024)",
     p2_d: "Análisis de 30 años de datos del FMI. Tres métricas propias (índice de salud fiscal, dinámica fiscal y puntuación de vulnerabilidad) y un dashboard interactivo en Tableau con linking & brushing.",
     p2_f: "Hallazgo: la riqueza de un país no predice su salud fiscal.",
+    p3_k: "Análisis exploratorio",
     p3_t: "Autoempleo en la UE (2010–2024)",
     p3_d: "Análisis exploratorio del autoempleo en Europa con datos abiertos de Eurostat. Mapas interactivos por país y por región NUTS 2, análisis por género y nivel educativo, y correlación con el desempleo.",
     p3_f1: "Las mujeres con formación superior son las que más emprenden, al contrario que los hombres, donde emprenden más los menos cualificados.",
@@ -380,8 +511,10 @@ const T = {
     l_map: "Mapa, scatter y matriz de riesgo", l_ts: "Austeridad vs. desempleo", l_race: "Ranking 1995–2024",
     l_web: "Web", l_dashb: "Dashboard", l_mobile: "App móvil",
     hack_h: "Hackathons",
+    h1_name: "Hackathon de Avilés",
+    status_dev: "En desarrollo",
     award_1: "1.er puesto · Oct. 2026",
-    h1_d: "Mapavilés: app sobre la oferta de ocio de la ciudad con simulación de afluencia a partir de datos públicos, prototipada con herramientas de IA. Me encargué de las fuentes de datos, la definición de la simulación y la presentación del modelo de negocio.",
+    h1_d: "App sobre la oferta de ocio de la ciudad con simulación de afluencia a partir de datos públicos, prototipada con herramientas de IA. Me encargué de las fuentes de datos, la definición de la simulación y la presentación del modelo de negocio.",
     tag_public: "Datos públicos", tag_sim: "Simulación",
     h2_meta: "Hackathon de ciberseguridad · Clúster TIC de Asturias · reto de Ewala · 2025",
     h2_d: "El reto era construir una herramienta que detecte y evalúe dominios sospechosos de suplantar a una empresa. Nuestra propuesta, domainEYE, busca dominios similares al oficial, evalúa cada uno con fuentes abiertas (OSINT) y genera un informe del riesgo.",
@@ -421,13 +554,16 @@ const T = {
     about_p1: "I'm studying Applied Data Science at UOC (expected graduation 2027) and I come from four years in quality control and data validation in industry. I'm used to working with noisy data, spotting deviations early and turning them into information people can decide with.",
     about_p2: "I care about the whole cycle, from raw data to decision: cleaning, exploring, modelling and, above all, explaining clearly what comes out. Below you can see the hackathons I've taken part in and my projects.",
     proj_h: "Projects",
+    p1_k: "Modelling project",
     p1_t: "Credit Risk Prediction",
     p1_d: "Classification of credit applicants (German Credit) using decision trees and ensemble models, evaluated under an asymmetric cost matrix (FN=5, FP=1). Explainability with Feature Importance, ALE and SHAP values.",
     p1_f: "Highest-risk profile: applicants with a negative balance requesting long-term loans. The best model (pruned C5.0) cuts cost by around 38% compared to having no model.",
     p1_cap: "Variable importance in predicting default. Checking account balance and loan duration stand out from the rest.",
+    p2_k: "Analysis and visualization",
     p2_t: "Fiscal health of 182 countries (1995–2024)",
     p2_d: "Analysis of 30 years of IMF data. Three custom metrics (fiscal health index, fiscal dynamics and vulnerability score) and an interactive Tableau dashboard with linking & brushing.",
     p2_f: "Finding: a country's wealth doesn't predict its fiscal health.",
+    p3_k: "Exploratory analysis",
     p3_t: "Self-employment in the EU (2010–2024)",
     p3_d: "Exploratory analysis of self-employment across Europe using open Eurostat data. Interactive maps by country and by NUTS 2 region, gender and education analysis, and correlation with unemployment rates.",
     p3_f1: "Women with higher education are the ones who start businesses the most, unlike men, where the least qualified are the ones who do.",
@@ -439,8 +575,10 @@ const T = {
     l_map: "Map, scatter and risk matrix", l_ts: "Austerity vs. unemployment", l_race: "Ranking 1995–2024",
     l_web: "Website", l_dashb: "Dashboard", l_mobile: "Mobile app",
     hack_h: "Hackathons",
+    h1_name: "Avilés Hackathon",
+    status_dev: "In development",
     award_1: "1st place · Oct. 2026",
-    h1_d: "Mapavilés: an app about the city's leisure offer with crowd simulation built from public data, prototyped with AI tools. I handled data sources, the simulation design and the business model presentation.",
+    h1_d: "An app about the city's leisure offer with crowd simulation built from public data, prototyped with AI tools. I handled data sources, the simulation design and the business model presentation.",
     tag_public: "Public data", tag_sim: "Simulation",
     h2_meta: "Cybersecurity hackathon · Asturias ICT Cluster · Ewala challenge · 2025",
     h2_d: "The challenge was to build a tool that detects and assesses domains suspected of impersonating a company. Our proposal, domainEYE, searches for domains similar to the official one, assesses each one with open sources (OSINT) and generates a risk report.",
@@ -501,6 +639,41 @@ function setMap(btn) {
     l = (navigator.language || 'es').toLowerCase().indexOf('en') === 0 ? 'en' : 'es';
   }
   setLang(l);
+})();
+
+// Tira de tecnologías: l = lenguajes, m = machine learning, v = visualización, t = herramientas
+(function () {
+  var tech = [
+    ["Python","l"],["R","l"],["SQL","l"],["Java","l"],["Bash","l"],
+    ["Pandas","m"],["NumPy","m"],["Scikit-Learn","m"],["XGBoost","m"],["Random Forest","m"],["SHAP","m"],
+    ["Tableau","v"],["Flourish","v"],["Seaborn","v"],["Folium","v"],
+    ["Git / GitHub","t"],["SAP","t"],["Excel","t"]
+  ];
+  var html = "";
+  for (var i = 0; i < 4; i++) {
+    tech.forEach(function (t) {
+      html += '<span class="pill k-' + t[1] + '"' + (i > 0 ? ' data-dup' : '') + '>' + t[0] + '</span>';
+    });
+  }
+  document.getElementById('track').innerHTML = html;
+})();
+
+// Aparición suave al hacer scroll
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  var sel = 'section > .wrap > h2, .about p, .card, .feature, .proj, .job, .cols > div, .contact p, .contact .btns';
+  var els = document.querySelectorAll(sel);
+  els.forEach(function (el) { el.classList.add('reveal'); });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      el.classList.add('in');
+      io.unobserve(el);
+      setTimeout(function () { el.classList.remove('reveal', 'in'); }, 900);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function (el) { io.observe(el); });
 })();
 </script>
 </body>
